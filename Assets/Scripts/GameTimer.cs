@@ -1,11 +1,11 @@
+using TMPro;
 using UnityEngine;
-using TMPro; 
 
 public class GameTimer : MonoBehaviour
 {
-    public TextMeshProUGUI timerText; 
-    private float elapsedTime = 0f; 
-    private bool isRunning = true; 
+    public TextMeshProUGUI timerText;
+    private float elapsedTime = 0f;
+    private bool isRunning = true;
 
     void Update()
     {
@@ -18,13 +18,19 @@ public class GameTimer : MonoBehaviour
 
     private void UpdateTimerDisplay()
     {
-        int minutes = Mathf.FloorToInt(elapsedTime / 60); 
-        int seconds = Mathf.FloorToInt(elapsedTime % 60); 
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds); 
+        int minutes = Mathf.FloorToInt(elapsedTime / 60);
+        int seconds = Mathf.FloorToInt(elapsedTime % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     public void StopTimer()
     {
         isRunning = false;
+    }
+
+    // Método para obtener el tiempo transcurrido
+    public float GetElapsedTime()
+    {
+        return elapsedTime;
     }
 }
