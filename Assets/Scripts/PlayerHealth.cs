@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         if (gameManager == null)
         {
-            Debug.LogError("No se encontrï¿½ el GameManager en la escena.");
+            Debug.LogError("No se encontró el GameManager en la escena.");
         }
 >>>>>>> Victory_And_Defeat_Poster
     }
@@ -51,10 +51,19 @@ public class PlayerHealth : MonoBehaviour
     void GameOver()
     {
         Debug.Log("Game Over: El jugador ha perdido todas las vidas.");
+<<<<<<< HEAD
         gameManager.EndGame(false);
+=======
 
         // Detener el tiempo de juego
         Time.timeScale = 0;
 
+        // Llamar a la función EndGame en el GameManager para mostrar la pantalla de derrota
+        if (gameManager != null)
+        {
+            gameManager.EndGame(false);
+        }
+>>>>>>> Victory_And_Defeat_Poster
     }
 }
+
