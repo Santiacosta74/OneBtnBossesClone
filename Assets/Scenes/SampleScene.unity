@@ -1835,7 +1835,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< HEAD
     - target: {fileID: 1792283501042220871, guid: 797409dd326367e428d7919f2fab3650, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.44
@@ -1851,11 +1850,6 @@ PrefabInstance:
     - target: {fileID: 1792283501042220871, guid: 797409dd326367e428d7919f2fab3650, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-=======
-    - target: {fileID: -5737973557356048064, guid: 797409dd326367e428d7919f2fab3650, type: 3}
-      propertyPath: projectileSpeed
-      value: 3
->>>>>>> Victory_And_Defeat_Poster
       objectReference: {fileID: 0}
     - target: {fileID: 2430214898972294837, guid: 797409dd326367e428d7919f2fab3650, type: 3}
       propertyPath: m_LocalPosition.x
