@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject startPanel;  
+    public GameObject startPanel;    
     public GameObject gameOverPanel; 
 
     private bool isGameStarted = false;
@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ShowStartScreen();
+        Time.timeScale = 0; 
     }
 
     void Update()
@@ -24,24 +25,27 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         isGameStarted = true;
-        startPanel.SetActive(false); 
+        startPanel.SetActive(false);
+        Time.timeScale = 1; 
     }
 
     public void EndGame(bool isVictory)
     {
         isGameStarted = false;
-        gameOverPanel.SetActive(true); 
-        // Nacho aca podes mostrar los detalles de victoria o derrota
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0; 
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+        Time.timeScale = 1; 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void ShowStartScreen()
     {
-        startPanel.SetActive(true);   
-        gameOverPanel.SetActive(false); 
+        startPanel.SetActive(true);
+        gameOverPanel.SetActive(false);
+        Time.timeScale = 0; 
     }
 }

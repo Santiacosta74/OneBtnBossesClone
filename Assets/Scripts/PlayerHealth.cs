@@ -4,10 +4,11 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxLives = 3;  
     private int currentLives;   
-
+    private GameManager gameManager;
     void Start()
     {
-        currentLives = maxLives;  
+        currentLives = maxLives;
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -32,5 +33,6 @@ public class PlayerHealth : MonoBehaviour
     void GameOver()
     {
         Debug.Log("Game Over: El jugador ha perdido todas las vidas.");
+        gameManager.EndGame(false);
     }
 }
