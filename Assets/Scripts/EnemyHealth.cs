@@ -2,19 +2,27 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int maxHealth = 100;  
-    private int currentHealth;   
+    public int maxHealth = 100;
+    private int currentHealth;
+    private GameManager gameManager; // Referencia al GameManager
 
     void Start()
     {
-        currentHealth = maxHealth; 
+        currentHealth = maxHealth;
+
+        // Buscar y asignar el GameManager en la escena
+        gameManager = FindObjectOfType<GameManager>();
+        if (gameManager == null)
+        {
+            Debug.LogError("No se encontró el GameManager en la escena.");
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Projectile"))
         {
-            TakeDamage(10); 
+            TakeDamage(10);
         }
     }
 
@@ -32,6 +40,14 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("El enemigo ha sido derrotado.");
-        Destroy(gameObject); 
+
+        // Llamar a la función EndGame en el GameManager para mostrar la pantalla de victoria
+        if (gameManager != null)
+        {
+            gameManager.EndGame(true);
+        }
+
+        Destroy(gameObject); // Destruir al enemigo después de activar la pantalla de victoria
+        Time.timeScale = 0;
     }
 }

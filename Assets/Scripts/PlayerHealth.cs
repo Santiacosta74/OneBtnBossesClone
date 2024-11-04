@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+<<<<<<< HEAD
     public int maxLives = 3;  
     private int currentLives;   
     private GameManager gameManager;
@@ -9,6 +10,22 @@ public class PlayerHealth : MonoBehaviour
     {
         currentLives = maxLives;
         gameManager = FindObjectOfType<GameManager>();
+=======
+    public int maxLives = 3;
+    private int currentLives;
+    private GameManager gameManager; // Referencia al GameManager
+
+    void Start()
+    {
+        currentLives = maxLives;
+
+        // Buscar y asignar el GameManager en la escena
+        gameManager = FindObjectOfType<GameManager>();
+        if (gameManager == null)
+        {
+            Debug.LogError("No se encontr� el GameManager en la escena.");
+        }
+>>>>>>> Victory_And_Defeat_Poster
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -16,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
         if (collision.CompareTag("EnemyProjectile"))
         {
             TakeDamage(1);
+            Destroy(collision.gameObject);
         }
     }
 
@@ -34,5 +52,9 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Game Over: El jugador ha perdido todas las vidas.");
         gameManager.EndGame(false);
+
+        // Detener el tiempo de juego
+        Time.timeScale = 0;
+
     }
 }
