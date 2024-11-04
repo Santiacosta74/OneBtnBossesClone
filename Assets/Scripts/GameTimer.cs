@@ -1,5 +1,6 @@
 using UnityEngine;
-using TMPro; 
+using TMPro;
+using System;
 
 public class GameTimer : MonoBehaviour
 {
@@ -26,5 +27,10 @@ public class GameTimer : MonoBehaviour
     public void StopTimer()
     {
         isRunning = false;
+    }
+
+    internal float GetElapsedTime()
+    {
+        throw new NotImplementedException();
     }
 }

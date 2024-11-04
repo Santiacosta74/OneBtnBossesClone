@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxLives = 3;  
-    private int currentLives;   
+    public int maxLives = 3;
+    private int currentLives;
     private GameManager gameManager;
+
     void Start()
     {
         currentLives = maxLives;
+
         gameManager = FindObjectOfType<GameManager>();
     }
 
@@ -16,6 +18,7 @@ public class PlayerHealth : MonoBehaviour
         if (collision.CompareTag("EnemyProjectile"))
         {
             TakeDamage(1);
+            Destroy(collision.gameObject); // Destruir el proyectil al colisionar
         }
     }
 
@@ -34,5 +37,6 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Game Over: El jugador ha perdido todas las vidas.");
         gameManager.EndGame(false);
+        Time.timeScale = 0;
     }
 }
