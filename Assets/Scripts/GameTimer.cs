@@ -28,8 +28,8 @@ public class GameTimer : MonoBehaviour
         isRunning = false;
     }
 
-    public float GetElapsedTime() // Cambié "internal" por "public"
+    public float GetElapsedTime() 
     {
-        return elapsedTime; // Devuelve el tiempo transcurrido
+        return elapsedTime; 
     }
 }

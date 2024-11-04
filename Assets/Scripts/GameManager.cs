@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ShowStartScreen();
-
+        Time.timeScale = 0;
         gameTimer = FindObjectOfType<GameTimer>();
 
         if (PlayerPrefs.HasKey("BestTime"))
@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         if (!isGameStarted && Input.GetKeyDown(KeyCode.Space))
         {
             StartGame();
+            Time.timeScale = 1;
         }
     }
     public void StartGame()

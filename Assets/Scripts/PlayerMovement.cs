@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float radius = 2f; 
+    public float radius = 4f; 
     public float speed = 2f;  
 
     private float angle = 0f;
