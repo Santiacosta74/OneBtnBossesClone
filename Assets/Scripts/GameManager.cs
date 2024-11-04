@@ -6,35 +6,41 @@ public class GameManager : MonoBehaviour
 {
     public GameObject startPanel;
     public GameObject gameOverPanel;
-    public GameObject gameWinPanel;   
-    public TextMeshProUGUI winTimeText;  
-    public TextMeshProUGUI bestTimeText;  
+    public GameObject gameWinPanel;
+    public TextMeshProUGUI winTimeText;
+    public TextMeshProUGUI bestTimeText;
 
     private bool isGameStarted = false;
     private float bestTime = float.MaxValue;
-
     private GameTimer gameTimer;
 
     void Start()
     {
         ShowStartScreen();
-        Time.timeScale = 0;
+        Time.timeScale = 0;  // Pausar el juego en la pantalla de inicio
         gameTimer = FindObjectOfType<GameTimer>();
 
+        // Cargar el mejor tiempo guardado solo si existe
         if (PlayerPrefs.HasKey("BestTime"))
         {
             bestTime = PlayerPrefs.GetFloat("BestTime");
+        }
+        else
+        {
+            bestTimeText.text = ""; // No mostrar nada si no hay un tiempo guardado
         }
     }
 
     void Update()
     {
+        // Iniciar el juego al presionar la barra espaciadora
         if (!isGameStarted && Input.GetKeyDown(KeyCode.Space))
         {
             StartGame();
             Time.timeScale = 1;
         }
     }
+
     public void StartGame()
     {
         isGameStarted = true;
@@ -44,7 +50,6 @@ public class GameManager : MonoBehaviour
     public void EndGame(bool isVictory)
     {
         isGameStarted = false;
-
         gameTimer.StopTimer();
         float elapsedTime = gameTimer.GetElapsedTime();
 
@@ -63,11 +68,12 @@ public class GameManager : MonoBehaviour
         gameWinPanel.SetActive(true);
         winTimeText.text = "Tiempo: " + FormatTime(elapsedTime);
 
-        if (elapsedTime < bestTime)
+        // Si es la primera vez o se establece un nuevo mejor tiempo, se guarda
+        if (bestTime == float.MaxValue || elapsedTime < bestTime)
         {
             bestTime = elapsedTime;
             bestTimeText.text = "¡Nuevo mejor tiempo!";
-            PlayerPrefs.SetFloat("BestTime", bestTime); 
+            PlayerPrefs.SetFloat("BestTime", bestTime);  // Guardar el nuevo mejor tiempo
         }
         else
         {
@@ -98,5 +104,11 @@ public class GameManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
         return string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    void OnApplicationQuit()
+    {
+        // Resetear el mejor tiempo al salir del juego
+        PlayerPrefs.DeleteKey("BestTime");
     }
 }
