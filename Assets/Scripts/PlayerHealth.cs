@@ -16,7 +16,6 @@ public class PlayerHealth : MonoBehaviour
         if (collision.CompareTag("EnemyProjectile"))
         {
             TakeDamage(1);
-            Destroy(collision.gameObject);
         }
     }
 
