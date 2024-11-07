@@ -1,25 +1,30 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float radius = 4f; 
-    public float speed = 2f;  
+    public PathPointsGenerator pathPointsGenerator;
+    public float movementSpeed = 2f;
+    private List<Vector2> pathPoints;
+    private int currentPointIndex = 0;
 
-    private float angle = 0f;
+    void Start()
+    {
+        pathPoints = pathPointsGenerator.pathPoints;
+    }
 
     void Update()
     {
-        angle += speed * Time.deltaTime;
- 
-        float x = Mathf.Cos(angle) * radius;
-        float y = Mathf.Sin(angle) * radius;
+        if (pathPoints == null || pathPoints.Count == 0) return;
 
-        transform.position = new Vector2(x, y);
+        // esto mueve hacia el siguiente punto en la lista
+        Vector2 targetPosition = pathPoints[currentPointIndex];
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        // esto verifica si llegamos al punto actual, para pasar al siguiente
+        if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
         {
-            speed = -speed; 
+            currentPointIndex = (currentPointIndex + 1) % pathPoints.Count;
         }
-
     }
 }
