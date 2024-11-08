@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed = 2f;
     private List<Vector2> pathPoints;
     private int currentPointIndex = 0;
+    private bool movingForward = true;
 
     void Start()
     {
@@ -15,16 +16,29 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // Detección de cambio de dirección en cada frame
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        {
+            movingForward = !movingForward;
+            // Ajuste inmediato de dirección en el índice
+            currentPointIndex = movingForward ? (currentPointIndex + 1) % pathPoints.Count
+                                              : (currentPointIndex - 1 + pathPoints.Count) % pathPoints.Count;
+        }
+    }
+
+    void FixedUpdate()
+    {
         if (pathPoints == null || pathPoints.Count == 0) return;
 
-        // esto mueve hacia el siguiente punto en la lista
+        // Movimiento en dirección al siguiente punto
         Vector2 targetPosition = pathPoints[currentPointIndex];
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementSpeed * Time.fixedDeltaTime);
 
-        // esto verifica si llegamos al punto actual, para pasar al siguiente
+        // Verificar si llegamos al punto actual para cambiar al siguiente
         if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
         {
-            currentPointIndex = (currentPointIndex + 1) % pathPoints.Count;
+            currentPointIndex = movingForward ? (currentPointIndex + 1) % pathPoints.Count
+                                              : (currentPointIndex - 1 + pathPoints.Count) % pathPoints.Count;
         }
     }
 }
