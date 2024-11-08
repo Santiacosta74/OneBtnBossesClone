@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class PlayerMovement : MonoBehaviour
 {
     public PathPointsGenerator pathPointsGenerator;
-    public float speed = 2f;
+    public float movementSpeed = 2f;
     private List<Vector2> pathPoints;
     private int currentPointIndex = 0;
 
@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
         // esto mueve hacia el siguiente punto en la lista
         Vector2 targetPosition = pathPoints[currentPointIndex];
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
 
         // esto verifica si llegamos al punto actual, para pasar al siguiente
         if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
