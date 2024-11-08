@@ -334,6 +334,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 151523461}
   m_CullTransparentMesh: 1
+--- !u!1 &309404996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 309404998}
+  - component: {fileID: 309404997}
+  m_Layer: 0
+  m_Name: PathGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &309404997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309404996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4664c21c5bb8948a63d2f6a78f09b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 4
+  numberOfPoints: 50
+  pathPoints: []
+--- !u!4 &309404998
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309404996}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4589442, y: 0.1530576, z: -0.05571384}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &317242313
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,10 +839,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8490020087166453114, guid: 63441e3e9ba9dfa4fa9b66072c929b1a, type: 3}
-      propertyPath: maxLives
-      value: 1
+    - target: {fileID: -3780357541651086814, guid: 63441e3e9ba9dfa4fa9b66072c929b1a, type: 3}
+      propertyPath: movementSpeed
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: -3780357541651086814, guid: 63441e3e9ba9dfa4fa9b66072c929b1a, type: 3}
+      propertyPath: pathPointsGenerator
+      value: 
+      objectReference: {fileID: 309404997}
     - target: {fileID: 3875368437270875595, guid: 63441e3e9ba9dfa4fa9b66072c929b1a, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2252,3 +2303,4 @@ SceneRoots:
   - {fileID: 1751456460}
   - {fileID: 317242318}
   - {fileID: 1698236639}
+  - {fileID: 309404998}
