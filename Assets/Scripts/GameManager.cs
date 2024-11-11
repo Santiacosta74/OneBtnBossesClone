@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour
     public GameObject startPanel;
     public GameObject gameOverPanel;
     public GameObject gameWinPanel;
+    public GameObject healthSliderPanel;
+    public GameObject powerupPanel;
     public TextMeshProUGUI winTimeText;
     public TextMeshProUGUI bestTimeText;
 
     private bool isGameStarted = false;
-    private bool isGameOver = false; // Nueva variable
+    private bool isGameOver = false; 
     private float bestTime = float.MaxValue;
     private GameTimer gameTimer;
 
@@ -33,7 +35,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // Solo permite iniciar el juego si no ha empezado y no ha terminado
         if (!isGameStarted && !isGameOver && Input.GetKeyDown(KeyCode.Space))
         {
             StartGame();
@@ -45,12 +46,14 @@ public class GameManager : MonoBehaviour
     {
         isGameStarted = true;
         startPanel.SetActive(false);
+        healthSliderPanel.SetActive(true);
+        powerupPanel.SetActive(true);
     }
 
     public void EndGame(bool isVictory)
     {
         isGameStarted = false;
-        isGameOver = true; // Indica que el juego ha terminado
+        isGameOver = true;
         gameTimer.StopTimer();
         float elapsedTime = gameTimer.GetElapsedTime();
 
@@ -67,6 +70,7 @@ public class GameManager : MonoBehaviour
     private void ShowWinScreen(float elapsedTime)
     {
         gameWinPanel.SetActive(true);
+        healthSliderPanel.SetActive(false);
         winTimeText.text = "TIME:  " + FormatTime(elapsedTime);
 
         if (bestTime == float.MaxValue || elapsedTime < bestTime)
@@ -84,12 +88,14 @@ public class GameManager : MonoBehaviour
     private void ShowGameOverScreen()
     {
         gameOverPanel.SetActive(true);
+        healthSliderPanel.SetActive(false);
+        powerupPanel.SetActive(false);
     }
 
     public void RestartGame()
     {
         Time.timeScale = 1;
-        isGameOver = false; // Resetea el estado de juego terminado al reiniciar
+        isGameOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -98,6 +104,8 @@ public class GameManager : MonoBehaviour
         startPanel.SetActive(true);
         gameOverPanel.SetActive(false);
         gameWinPanel.SetActive(false);
+        healthSliderPanel.SetActive(false);
+        powerupPanel.SetActive(false);
     }
 
     private string FormatTime(float time)

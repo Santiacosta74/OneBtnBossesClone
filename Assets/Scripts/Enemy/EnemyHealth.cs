@@ -1,20 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
     public int maxHealth = 100;
     private int currentHealth;
-    private GameManager gameManager; 
+    private GameManager gameManager;
+    public Slider healthSlider;
 
     void Start()
     {
         currentHealth = maxHealth;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = currentHealth;
 
         gameManager = FindObjectOfType<GameManager>();
-        if (gameManager == null)
-        {
-            Debug.LogError("No se encontró el GameManager en la escena.");
-        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -28,7 +28,7 @@ public class EnemyHealth : MonoBehaviour
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log("Salud del enemigo: " + currentHealth);
+        healthSlider.value = currentHealth;
 
         if (currentHealth <= 0)
         {
@@ -38,14 +38,8 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("El enemigo ha sido derrotado.");
-
-        if (gameManager != null)
-        {
-            gameManager.EndGame(true);
-        }
-
-        Destroy(gameObject); 
+        gameManager?.EndGame(true);
+        Destroy(gameObject);
         Time.timeScale = 0;
     }
 }
