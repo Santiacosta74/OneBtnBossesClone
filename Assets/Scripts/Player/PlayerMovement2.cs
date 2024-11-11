@@ -21,7 +21,7 @@ public class PlayerMovement2 : MonoBehaviour
     private bool isChargingEnergy = false; // Para saber si la energía está siendo recargada
     private float currentEnergy = 0f; // Energía inicial del jugador (arranca en 0)
 
-    private PlayerHealth2 playerHealth; // Referencia al script PlayerHealth
+    private PlayerHealth2 PlayerHealth2; // Referencia al script PlayerHealth
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class PlayerMovement2 : MonoBehaviour
         StartCoroutine(WaitForPathPoints());
 
         // Encontramos el componente PlayerHealth en el mismo objeto
-        playerHealth = GetComponent<PlayerHealth2>();
+        PlayerHealth2 = GetComponent<PlayerHealth2>();
     }
 
     private IEnumerator WaitForPathPoints()
