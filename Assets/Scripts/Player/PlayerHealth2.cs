@@ -1,30 +1,24 @@
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth2 : MonoBehaviour
 {
     public int maxLives = 3;
     private int currentLives;
     private GameManager gameManager;
-
-    // Referencia al script PlayerMovement2
     private PlayerMovement2 playerMovement;
 
     void Start()
     {
         currentLives = maxLives;
         gameManager = FindObjectOfType<GameManager>();
-
-        // Encontramos el componente PlayerMovement2 en el mismo objeto
         playerMovement = GetComponent<PlayerMovement2>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // Solo aplica daño si el jugador no está invulnerable (haciendo el dash)
-        if (playerMovement != null && !playerMovement.IsInvulnerable() && collision.CompareTag("EnemyProjectile"))
+        if (playerMovement != null && !playerMovement.IsInvulnerable() && collision.CompareTag("Obstacle"))
         {
             TakeDamage(1);
-            Destroy(collision.gameObject); // Destruir el proyectil al colisionar
         }
     }
 

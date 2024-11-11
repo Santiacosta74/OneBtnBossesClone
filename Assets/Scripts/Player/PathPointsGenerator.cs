@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
@@ -30,16 +30,16 @@ public class PathPointsGenerator : MonoBehaviour
 
     void DrawPathLines()
     {
-        lineRenderer.positionCount = pathPoints.Count + 1; // Para cerrar el círculo
+        lineRenderer.positionCount = pathPoints.Count + 1; // Para cerrar el cï¿½rculo
         lineRenderer.startWidth = 0.05f;
         lineRenderer.endWidth = 0.05f;
-        lineRenderer.loop = true; // Para cerrar el círculo
+        lineRenderer.loop = true; // Para cerrar el cï¿½rculo
 
         for (int i = 0; i < pathPoints.Count; i++)
         {
             lineRenderer.SetPosition(i, new Vector3(pathPoints[i].x, pathPoints[i].y, 0));
         }
-        // Conectar el último punto con el primero
+        // Conectar el ï¿½ltimo punto con el primero
         lineRenderer.SetPosition(pathPoints.Count, new Vector3(pathPoints[0].x, pathPoints[0].y, 0));
     }
 

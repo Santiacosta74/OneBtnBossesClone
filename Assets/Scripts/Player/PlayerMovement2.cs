@@ -21,7 +21,7 @@ public class PlayerMovement2 : MonoBehaviour
     private bool isChargingEnergy = false; // Para saber si la energía está siendo recargada
     private float currentEnergy = 0f; // Energía inicial del jugador (arranca en 0)
 
-    private PlayerHealth playerHealth; // Referencia al script PlayerHealth
+    private PlayerHealth2 playerHealth; // Referencia al script PlayerHealth
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class PlayerMovement2 : MonoBehaviour
         StartCoroutine(WaitForPathPoints());
 
         // Encontramos el componente PlayerHealth en el mismo objeto
-        playerHealth = GetComponent<PlayerHealth>();
+        playerHealth = GetComponent<PlayerHealth2>();
     }
 
     private IEnumerator WaitForPathPoints()
@@ -63,7 +63,7 @@ public class PlayerMovement2 : MonoBehaviour
         }
 
         // Debug log para mostrar la energía
-        Debug.Log("Energía actual: " + currentEnergy);
+        //Debug.Log("Energía actual: " + currentEnergy);
 
         // Actualizamos la barra de energía
         if (energyBar != null)
@@ -112,7 +112,7 @@ public class PlayerMovement2 : MonoBehaviour
             }
 
             // Debug log para mostrar la energía mientras se hace el dash
-            Debug.Log("Energía durante el Dash: " + currentEnergy);
+            //Debug.Log("Energía durante el Dash: " + currentEnergy);
 
             yield return null;
         }
