@@ -18,7 +18,7 @@ public class PlayerHealth1 : MonoBehaviour
         if (collision.CompareTag("EnemyProjectile"))
         {
             TakeDamage(1);
-            Destroy(collision.gameObject); // Destruir el proyectil al colisionar
+            Destroy(collision.gameObject); 
         }
     }
 
