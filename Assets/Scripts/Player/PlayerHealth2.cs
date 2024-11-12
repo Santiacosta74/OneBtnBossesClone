@@ -16,7 +16,7 @@ public class PlayerHealth2 : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (playerMovement != null && !playerMovement.IsInvulnerable() && collision.CompareTag("Obstacle"))
+        if (playerMovement != null && !playerMovement.IsInvulnerable() && collision.CompareTag("Obstacle") || playerMovement != null && !playerMovement.IsInvulnerable() && collision.CompareTag("Arrow"))
         {
             TakeDamage(1);
         }
