@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ProjectileMovement : MonoBehaviour
+public class ArrowsMovement : MonoBehaviour
 {
     private Vector3 targetPosition;
     private float speed;
@@ -19,9 +19,6 @@ public class ProjectileMovement : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
-        {
-            Destroy(gameObject);
-        }
+
     }
 }

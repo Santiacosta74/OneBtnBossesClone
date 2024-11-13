@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BossCubeAttack : MonoBehaviour
 {
-    public GameObject obstaclePrefab;
+    public ObjectPool obstaclePool;
     public float spawnInterval = 3f;
     public PathPointsGenerator pathPointsGenerator;
     private float timer = 0f;
@@ -37,17 +37,16 @@ public class BossCubeAttack : MonoBehaviour
         float t = Random.Range(0f, 1f);
         Vector2 spawnPosition = Vector2.Lerp(point1, point2, t);
 
-        float randomAngle = Random.Range(0f, 360f);
-        Quaternion randomRotation = Quaternion.Euler(0f, 0f, randomAngle);
+        GameObject obstacle = obstaclePool.GetObject();
+        obstacle.transform.position = spawnPosition;
+        obstacle.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
 
-        GameObject obstacle = Instantiate(obstaclePrefab, spawnPosition, randomRotation);
+        StartCoroutine(ReturnToPool(obstacle, 3f));
+    }
 
-        Collider2D obstacleCollider = obstacle.GetComponent<Collider2D>();
-        if (obstacleCollider != null)
-        {
-            obstacleCollider.enabled = true;
-        }
-
-        Destroy(obstacle, 3f);
+    private System.Collections.IEnumerator ReturnToPool(GameObject obj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        obstaclePool.ReturnObject(obj);
     }
 }

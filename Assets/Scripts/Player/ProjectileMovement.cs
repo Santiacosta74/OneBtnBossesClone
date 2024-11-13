@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Projectile : MonoBehaviour
 {
     public float projectileSpeed = 10f;
+    public ObjectPool objectPool;
 
     void Start()
     {
@@ -19,7 +21,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
+            objectPool.ReturnObject(gameObject);
         }
     }
 }

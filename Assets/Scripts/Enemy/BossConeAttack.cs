@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class BossConeAttack : MonoBehaviour
 {
-    public GameObject conePrefab; 
-    public float spawnInterval = 5f; 
-    public PathPointsGenerator pathPointsGenerator;  
-    private float timer = 0f;  
+    public ObjectPool conePool;
+    public float spawnInterval = 5f;
+    public PathPointsGenerator pathPointsGenerator;
+    private float timer = 0f;
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class BossConeAttack : MonoBehaviour
         if (timer >= spawnInterval)
         {
             SpawnCone();
-            timer = 0f;  
+            timer = 0f;
         }
     }
 
@@ -34,8 +34,16 @@ public class BossConeAttack : MonoBehaviour
         Vector2 spawnPosition = pathPointsGenerator.pathPoints[randomIndex];
 
         float randomAngle = Random.Range(0f, 360f);
+        GameObject cone = conePool.GetObject();
+        cone.transform.position = spawnPosition;
+        cone.transform.rotation = Quaternion.Euler(0f, 0f, randomAngle);
 
-        GameObject cone = Instantiate(conePrefab, spawnPosition, Quaternion.Euler(0f, 0f, randomAngle));
-        Destroy(cone, 2f);
+        StartCoroutine(ReturnToPool(cone, 2f));
+    }
+
+    private System.Collections.IEnumerator ReturnToPool(GameObject obj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        conePool.ReturnObject(obj);
     }
 }
