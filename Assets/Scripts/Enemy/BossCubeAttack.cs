@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class BossCubeAttack : MonoBehaviour
 {
-    public ObjectPool obstaclePool;
-    public float spawnInterval = 3f;
+    public AttackFactoryEnemy attackFactory;
     public PathPointsGenerator pathPointsGenerator;
+    public float spawnInterval = 3f;
     private float timer = 0f;
+    public ObjectPool obstaclePool; // Referencia al Object Pool de flechas
 
     void Start()
     {
@@ -37,9 +38,7 @@ public class BossCubeAttack : MonoBehaviour
         float t = Random.Range(0f, 1f);
         Vector2 spawnPosition = Vector2.Lerp(point1, point2, t);
 
-        GameObject obstacle = obstaclePool.GetObject();
-        obstacle.transform.position = spawnPosition;
-        obstacle.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+        GameObject obstacle = attackFactory.CreateObstacle(spawnPosition);
 
         StartCoroutine(ReturnToPool(obstacle, 3f));
     }

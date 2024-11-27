@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class BossConeAttack : MonoBehaviour
 {
-    public ObjectPool conePool;
-    public float spawnInterval = 5f;
+    public AttackFactoryEnemy attackFactory;
     public PathPointsGenerator pathPointsGenerator;
+    public float spawnInterval = 5f;
     private float timer = 0f;
+    public ObjectPool conePool; // Referencia al Object Pool de flechas
 
     void Start()
     {
@@ -33,10 +34,7 @@ public class BossConeAttack : MonoBehaviour
         int randomIndex = Random.Range(0, pathPointsGenerator.pathPoints.Count);
         Vector2 spawnPosition = pathPointsGenerator.pathPoints[randomIndex];
 
-        float randomAngle = Random.Range(0f, 360f);
-        GameObject cone = conePool.GetObject();
-        cone.transform.position = spawnPosition;
-        cone.transform.rotation = Quaternion.Euler(0f, 0f, randomAngle);
+        GameObject cone = attackFactory.CreateCone(spawnPosition);
 
         StartCoroutine(ReturnToPool(cone, 2f));
     }

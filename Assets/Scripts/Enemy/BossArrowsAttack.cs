@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class BossArrowsAttack : MonoBehaviour
 {
-    public ObjectPool ArrowsPool;
+    public AttackFactoryEnemy attackFactory;
     public Transform spawnPoint;
     public List<Transform> targetPointsWave1;
     public List<Transform> targetPointsWave2;
     public float spawnInterval = 0.1f;
     public float projectileSpeed = 5f;
+    public ObjectPool arrowsPool; // Referencia al Object Pool de flechas
 
     void Start()
     {
@@ -41,23 +42,14 @@ public class BossArrowsAttack : MonoBehaviour
 
     void LaunchProjectile(Transform targetPoint)
     {
-        GameObject Arrows = ArrowsPool.GetObject();
-        Arrows.transform.position = spawnPoint.position;
-        Arrows.transform.rotation = Quaternion.identity;
-
-        ArrowsMovement projectileMovement = Arrows.GetComponent<ArrowsMovement>();
-
-        if (projectileMovement != null && targetPoint != null)
-        {
-            projectileMovement.SetTarget(targetPoint.position, projectileSpeed);
-        }
-
-        StartCoroutine(ReturnToPool(Arrows, 5f));
+        GameObject arrow = attackFactory.CreateArrow(spawnPoint.position, targetPoint.position, projectileSpeed);
+        StartCoroutine(ReturnToPool(arrow, 5f));
     }
 
     private System.Collections.IEnumerator ReturnToPool(GameObject obj, float delay)
     {
         yield return new WaitForSeconds(delay);
-        ArrowsPool.ReturnObject(obj);
+        arrowsPool.ReturnObject(obj);
     }
 }
+

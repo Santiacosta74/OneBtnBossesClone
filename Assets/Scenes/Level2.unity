@@ -748,6 +748,7 @@ Transform:
   - {fileID: 1698236639}
   - {fileID: 1041636981}
   - {fileID: 633453305}
+  - {fileID: 2011134309}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &412950196
@@ -2372,9 +2373,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e2a867bad45204980d28540c9d86a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conePool: {fileID: 1503605164}
-  spawnInterval: 5
+  attackFactory: {fileID: 2011134310}
   pathPointsGenerator: {fileID: 1041636979}
+  spawnInterval: 5
+  conePool: {fileID: 1503605164}
 --- !u!4 &1399022180
 Transform:
   m_ObjectHideFlags: 0
@@ -2528,9 +2530,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33999c85d259824b8354bb6824a9f16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePool: {fileID: 1932637946}
-  spawnInterval: 2
+  attackFactory: {fileID: 2011134310}
   pathPointsGenerator: {fileID: 1041636979}
+  spawnInterval: 2
+  obstaclePool: {fileID: 1932637946}
 --- !u!4 &1533298410
 Transform:
   m_ObjectHideFlags: 0
@@ -3457,6 +3460,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 694888335}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2011134308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2011134309}
+  - component: {fileID: 2011134310}
+  m_Layer: 0
+  m_Name: AttackFactoryEnemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2011134309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011134308}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 358891970}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2011134310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011134308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86520db4ec4fc74d92b52df18a50bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclePool: {fileID: 1932637946}
+  conePool: {fileID: 1503605164}
+  arrowsPool: {fileID: 2005146372}
 --- !u!1001 &2098793515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3486,6 +3536,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2005146372}
     - target: {fileID: 2413278992038908574, guid: 9fbb3198c13b41c46bc71f263dd6d8d0, type: 3}
+      propertyPath: arrowsPool
+      value: 
+      objectReference: {fileID: 2005146372}
+    - target: {fileID: 2413278992038908574, guid: 9fbb3198c13b41c46bc71f263dd6d8d0, type: 3}
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 1615728977}
@@ -3493,6 +3547,10 @@ PrefabInstance:
       propertyPath: targetPoint
       value: 
       objectReference: {fileID: 1601298131}
+    - target: {fileID: 2413278992038908574, guid: 9fbb3198c13b41c46bc71f263dd6d8d0, type: 3}
+      propertyPath: attackFactory
+      value: 
+      objectReference: {fileID: 2011134310}
     - target: {fileID: 2413278992038908574, guid: 9fbb3198c13b41c46bc71f263dd6d8d0, type: 3}
       propertyPath: spawnInterval
       value: 0.15
