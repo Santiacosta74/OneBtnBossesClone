@@ -1,0 +1,45 @@
+{
+    "name": "PlayerControls",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "756933b6-e724-4a2a-aee5-60e0ae0c3683",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "df9eb2a3-e41e-4dd7-b088-1e7be438b8fb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0bccc28c-0e53-478e-970a-489729f3ceaa",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8dd62af0-2179-417c-aa73-14b2cb4e016e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
