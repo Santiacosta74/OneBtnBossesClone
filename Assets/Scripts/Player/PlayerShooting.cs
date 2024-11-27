@@ -10,6 +10,7 @@ public class PlayerShooting : MonoBehaviour
     private float nextShootTime = 0f;
     private float startTime;
     public AudioClip shootSound;
+    [Range(0, 1)] public float sfxVolume;
     void Start()
     {
         startTime = Time.time + startDelay; // Calcula el tiempo en que comienza a disparar
@@ -44,6 +45,7 @@ public class PlayerShooting : MonoBehaviour
         if (shootSound != null)
         {
             AudioManager.Instance.PlaySFX(shootSound);
+            AudioManager.Instance.SetSFXVolume(sfxVolume);
         }
     }
     private System.Collections.IEnumerator ReturnProjectileToPool(GameObject projectile, float delay)

@@ -143,6 +143,7 @@ MonoBehaviour:
   shootInterval: 0.2
   startDelay: 0
   shootSound: {fileID: 8300000, guid: b0176f23ea898784f81e347576d23550, type: 3}
+  sfxVolume: 0.5
 --- !u!96 &5115461371642844869
 TrailRenderer:
   serializedVersion: 3
