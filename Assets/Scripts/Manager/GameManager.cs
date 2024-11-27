@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     private float bestTime = float.MaxValue;
     private GameTimer gameTimer;
 
+    public AudioClip musicSource;
+    [Range(0, 1)] public float musicVolume = 0.5f; // Volumen inicial de música
+
     void Start()
     {
         ShowStartScreen();
@@ -48,10 +51,21 @@ public class GameManager : MonoBehaviour
         startPanel.SetActive(false);
         healthSliderPanel.SetActive(true);
         powerupPanel.SetActive(true);
+        PlayMusic();
+    }
+
+    public void PlayMusic()
+    {
+        if (musicSource != null)
+        {
+            AudioManager.Instance.PlayMusic(musicSource);
+            AudioManager.Instance.SetMusicVolume(musicVolume);
+        }
     }
 
     public void EndGame(bool isVictory)
     {
+        AudioManager.Instance.StopMusic();
         isGameStarted = false;
         isGameOver = true;
         gameTimer.StopTimer();

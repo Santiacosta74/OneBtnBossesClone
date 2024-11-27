@@ -138,8 +138,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 2956318159527626222, guid: cb80dc784ca58ea49a0cecbf59ec8c42, type: 3}
+  projectilePool: {fileID: 0}
   firePoint: {fileID: 4326441121647420788}
   shootInterval: 0.2
+  startDelay: 0
+  shootSound: {fileID: 8300000, guid: b0176f23ea898784f81e347576d23550, type: 3}
 --- !u!96 &5115461371642844869
 TrailRenderer:
   serializedVersion: 3
