@@ -2538,6 +2538,10 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: -5737973557356048064, guid: 797409dd326367e428d7919f2fab3650, type: 3}
+      propertyPath: projectilePool
+      value: 
+      objectReference: {fileID: 952873044}
+    - target: {fileID: -5737973557356048064, guid: 797409dd326367e428d7919f2fab3650, type: 3}
       propertyPath: projectileSpeed
       value: 6
       objectReference: {fileID: 0}
