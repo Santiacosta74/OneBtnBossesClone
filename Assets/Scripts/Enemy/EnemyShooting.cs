@@ -1,12 +1,12 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyShooting : MonoBehaviour
 {
-    public ObjectPool objectPool; // Referencia al Object Pool
+    public ObjectPool projectilePool; // Referencia al pool de proyectiles
     public Transform firePoint;
     public float shootInterval = 2f;
     public float projectileSpeed = 5f;
-
     private float nextShootTime = 0f;
 
     void Update()
@@ -20,27 +20,39 @@ public class EnemyShooting : MonoBehaviour
 
     void Shoot()
     {
-        // Obtener el proyectil desde el Object Pool
-        GameObject projectile = objectPool.GetObject();
+        // Obtener proyectil del pool
+        GameObject projectile = projectilePool.GetObject();
         projectile.transform.position = firePoint.position;
         projectile.transform.rotation = firePoint.rotation;
 
-        float randomAngle = Random.Range(0f, 360f);
-        Vector2 direction = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized;
+        // Asociar el ObjectPool con el proyectil
+        Projectile projectileComponent = projectile.GetComponent<Projectile>();
+        if (projectileComponent != null)
+        {
+            projectileComponent.objectPool = projectilePool; // Asegurar la referencia
+        }
 
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
+            // Calcular dirección aleatoria para el disparo
+            float randomAngle = Random.Range(0f, 360f);
+            Vector2 direction = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized;
             rb.velocity = direction * projectileSpeed;
         }
 
-        // Retornar el proyectil al pool después de un tiempo
-        StartCoroutine(ReturnToPoolAfterTime(projectile, 3f)); // Ajusta el tiempo según sea necesario
+        // Iniciar corutina para devolver al pool
+        StartCoroutine(ReturnProjectileToPool(projectile, 3f));
     }
 
-    private System.Collections.IEnumerator ReturnToPoolAfterTime(GameObject obj, float delay)
+    private IEnumerator ReturnProjectileToPool(GameObject projectile, float delay)
     {
         yield return new WaitForSeconds(delay);
-        objectPool.ReturnObject(obj);
+
+        // Verificar que el objeto no haya sido destruido
+        if (projectile != null && projectile.activeInHierarchy)
+        {
+            projectilePool.ReturnObject(projectile);
+        }
     }
 }
