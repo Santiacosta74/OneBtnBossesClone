@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI bestTimeText;
 
     private bool isGameStarted = false;
-    private bool isGameOver = false; 
+    private bool isGameOver = false;
     private float bestTime = float.MaxValue;
     private GameTimer gameTimer;
 
@@ -127,6 +127,11 @@ public class GameManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
         return string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("LevelSelectScene"); // Reemplaza "MenuScene" con el nombre de tu escena de menú
     }
 
     void OnApplicationQuit()
