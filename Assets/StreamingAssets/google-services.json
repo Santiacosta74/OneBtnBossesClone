@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "938602283310",
+    "project_id": "final-programacion-avanzada",
+    "storage_bucket": "final-programacion-avanzada.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938602283310:android:ac0cdf54bb098ee6313abf",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.DProject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClPuA82wSPvzlkDs3ifLRqZzwb_o_u6ZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938602283310:android:e3edf01faaefbd10313abf",
+        "android_client_info": {
+          "package_name": "com.miempresa.mijuego"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClPuA82wSPvzlkDs3ifLRqZzwb_o_u6ZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
