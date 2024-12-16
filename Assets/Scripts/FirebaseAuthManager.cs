@@ -1,8 +1,9 @@
 using Firebase;
 using Firebase.Auth;
 using UnityEngine;
-using TMPro; // Asegúrate de tener este using para TextMesh Pro
+using TMPro;
 using Firebase.Extensions;
+using UnityEngine.SceneManagement;
 
 public class FirebaseAuthManager : MonoBehaviour
 {
@@ -33,11 +34,30 @@ public class FirebaseAuthManager : MonoBehaviour
         {
             if (task.IsCanceled || task.IsFaulted)
             {
-                statusText.text = "Error en el registro: " + task.Exception;
+                // Manejo de errores con mensajes específicos
+                FirebaseException firebaseEx = task.Exception?.InnerExceptions?[0] as FirebaseException;
+                AuthError errorCode = (firebaseEx != null) ? (AuthError)firebaseEx.ErrorCode : (AuthError)(-1);  // Usamos -1 como valor genérico
+
+                switch (errorCode)
+                {
+                    case AuthError.InvalidEmail:
+                        statusText.text = "Correo electrónico inválido.";
+                        break;
+                    case AuthError.WeakPassword:
+                        statusText.text = "La contraseña es demasiado débil.";
+                        break;
+                    case AuthError.EmailAlreadyInUse:
+                        statusText.text = "El correo electrónico ya está en uso.";
+                        break;
+                    default:
+                        statusText.text = "Error en el registro: " + task.Exception?.Message;
+                        break;
+                }
                 return;
             }
 
-            FirebaseUser newUser = task.Result.User; // Accede al usuario desde AuthResul
+            FirebaseUser newUser = task.Result.User; // Accede al usuario desde AuthResult
+            SceneManager.LoadScene("LevelSelectScene");
             statusText.text = "Usuario registrado correctamente: " + newUser.DisplayName;
         });
     }
@@ -52,19 +72,31 @@ public class FirebaseAuthManager : MonoBehaviour
         {
             if (task.IsCanceled || task.IsFaulted)
             {
-                statusText.text = "Error en el login: " + task.Exception;
+                // Manejo de errores con mensajes específicos
+                FirebaseException firebaseEx = task.Exception?.InnerExceptions?[0] as FirebaseException;
+                AuthError errorCode = (firebaseEx != null) ? (AuthError)firebaseEx.ErrorCode : (AuthError)(-1);  // Usamos -1 como valor genérico
+
+                switch (errorCode)
+                {
+                    case AuthError.InvalidEmail:
+                        statusText.text = "Correo electrónico inválido.";
+                        break;
+                    case AuthError.WrongPassword:
+                        statusText.text = "Contraseña incorrecta.";
+                        break;
+                    case AuthError.UserNotFound:
+                        statusText.text = "Usuario no encontrado.";
+                        break;
+                    default:
+                        statusText.text = "Error en el login: " + task.Exception?.Message;
+                        break;
+                }
                 return;
             }
 
             FirebaseUser user = task.Result.User; // Accede al usuario desde AuthResult
+            SceneManager.LoadScene("LevelSelectScene");
             statusText.text = "Usuario logueado correctamente: " + user.Email;
         });
-    }
-
-    // Cerrar sesión
-    public void Logout()
-    {
-        auth.SignOut();
-        statusText.text = "Usuario desconectado";
     }
 }
