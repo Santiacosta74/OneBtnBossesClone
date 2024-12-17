@@ -20,7 +20,7 @@ public class FirebaseAuthManager : MonoBehaviour
         {
             FirebaseApp app = FirebaseApp.DefaultInstance;
             auth = FirebaseAuth.GetAuth(app);
-            statusText.text = "Firebase configurado correctamente";
+            //statusText.text = "Firebase configurado correctamente";
         });
     }
 
@@ -79,16 +79,16 @@ public class FirebaseAuthManager : MonoBehaviour
                 switch (errorCode)
                 {
                     case AuthError.InvalidEmail:
-                        statusText.text = "Correo electrónico inválido.";
+                        statusText.text = "Invalid Email.";
                         break;
                     case AuthError.WrongPassword:
-                        statusText.text = "Contraseña incorrecta.";
+                        statusText.text = "Invalid Password.";
                         break;
                     case AuthError.UserNotFound:
-                        statusText.text = "Usuario no encontrado.";
+                        statusText.text = "Usuario not found.";
                         break;
                     default:
-                        statusText.text = "Error en el login: " + task.Exception?.Message;
+                        statusText.text = "Your email or password are invalid. Please try again."; //+ task.Exception?.Message;
                         break;
                 }
                 return;
